@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate YouTube Research & Scripting Workflow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #10101E, #1F1F3A);
+            --card-bg: rgba(22, 22, 38, 0.6);
+            --solid-bg-for-pdf: #161625;
+            --border-color: rgba(128, 128, 255, 0.2);
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0B0;
+            --heading-gradient: linear-gradient(90deg, #8A2BE2, #4169E1);
+            --accent-color: #8A2BE2;
+            --button-bg: #4169E1;
+            --button-hover: #3158c8;
+            --success-color: #28a745;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        h1, h2, h3 { font-weight: 700; }
+        h1 { font-size: 2.8em; text-align: center; background: var(--heading-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; }
+        h2 { font-size: 2em; margin-top: 50px; margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+        h3 { display: flex; align-items: center; font-size: 1.5em; color: var(--text-primary); margin-bottom: 20px; }
+        p, li { font-size: 1.1em; line-height: 1.7; color: var(--text-secondary); }
+        ul { list-style-type: none; padding-left: 10px; }
+        li { margin-bottom: 15px; padding-left: 25px; position: relative; }
+        li::before { content: '➤'; color: var(--accent-color); position: absolute; left: 0; top: 2px; font-size: 0.9em; }
+        .step-number { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: var(--heading-gradient); color: white; font-size: 1.3em; font-weight: bold; border-radius: 10px; margin-right: 15px; flex-shrink: 0; }
+        .prompt-box { background-color: #10101E; border: 1px solid var(--border-color); border-radius: 12px; margin: 25px 0; position: relative; overflow: hidden; }
+        .prompt-header { background-color: rgba(0,0,0,0.2); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+        .prompt-title { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.9em; }
+        pre { padding: 20px; white-space: pre-wrap; word-wrap: break-word; margin: 0; max-height: 400px; overflow-y: auto; }
+        code { font-family: 'JetBrains Mono', monospace; color: #b3c5ff; font-size: 1em; }
+        .copy-btn { display: flex; align-items: center; gap: 8px; background-color: var(--button-bg); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; transition: all 0.3s ease; }
+        .copy-btn:hover { background-color: var(--button-hover); transform: translateY(-2px); }
+        .copy-btn svg { width: 16px; height: 16px; }
+        .footer-section { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 2px dashed var(--border-color); }
+        .download-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--heading-gradient); color: white; border: none; padding: 15px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .download-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4); }
+        .download-instruction { font-size: 0.9em; color: var(--text-secondary); margin-top: 15px; }
+        strong { font-weight: 600; color: #fff; }
+
+        /* --- CSS FOR PRINTING --- */
+        @media print {
+            body {
+                background: white; /* Print backgrounds are often ignored, but good practice */
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                /* Reset all web styles for a clean print layout */
+                max-width: 100%;
+                width: 100%;
+                background: var(--solid-bg-for-pdf) !important;
+                padding: 20mm;
+                box-shadow: none !important;
+                border: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border-radius: 0;
+            }
+            h1, h2, h3, p, li, code, strong {
+                /* Force the browser to use our exact colors, not black/white */
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            h1 {
+                /* Gradients need special handling for print */
+                background: var(--heading-gradient) !important;
+                -webkit-background-clip: text !important;
+                color: transparent !important; /* This combination makes it work */
+            }
+            /* Hide the download button and its section when printing */
+            .footer-section {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="workflow-content">
+        <!-- HTML Content is unchanged -->
+        <header><h1>The Ultimate YouTube Research & Scripting Workflow</h1></header>
+        <main>
+            <section id="part1">
+                <h2>Part 1: The Foundation</h2><h3>A) General Script Writing Workflow</h3><ul><li><strong>Hook:</strong> Grab the viewer's attention immediately.</li><li><strong>Victim Introduction:</strong> Introduce the central figure.</li><li><strong>Relationship Setup / Background:</strong> Provide context and establish connections.</li><li><strong>Main Crime/Incident:</strong> The central event of the story.</li><li><strong>Investigation Begins:</strong> The process of uncovering the truth starts.</li><li><strong>Major Twist Reveal:</strong> A significant, unexpected turn in the story.</li><li><strong>Motive & Planning Reveal:</strong> Explain the 'why' and 'how'.</li><li><strong>Family Reaction / Emotional Impact:</strong> Show the human consequences.</li><li><strong>Conclusion / Current Status:</strong> Wrap up the story and provide an update.</li><li><strong>Call to Action:</strong> What you want the viewer to do next.</li></ul><h3><div class="step-number">①</div> AI Research Prompt</h3><div class="prompt-box"><div class="prompt-header"><span class="prompt-title">Crime Story Research</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div><pre><code>**[Article Summary]:**
+[Insert the link or key details of the news article here.]
+
+**Answer the following questions based on the provided article:**
+
+1.  **Who:** Who are the primary individuals, groups, or organizations involved? Who are the key stakeholders?
+2.  **What:** What is the main event or issue? What are the critical details or developments?
+3.  **Where:** Where is this event taking place, and what is its significance? How does location influence it?
+4.  **When:** When did the event occur? What is the timeline? Are there historical or future implications?
+5.  **Why:** Why did this event happen? What are the underlying causes, motivations, or goals?
+6.  **How:** How did the event unfold? How does this event impact people, systems, or larger contexts?</code></pre></div>
+            </section>
+            <section id="part2">
+                <h2>Part 2: The AI-Powered Workflow</h2><h3><div class="step-number">④</div> Prompt AI for Data Organization</h3><div class="prompt-box"><div class="prompt-header"><span class="prompt-title">Data Structuring Prompt</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div><pre><code>I have a large amount of research data that I need to structure into a well-organized document. Your task is to:
+
+1.  **Remove** any repetitive words, phrases, or redundant information.
+2.  **Expand and explore** the key points to make the document detailed and informative.
+3.  **Structure** the data into the following sections:
+    *   **Introduction:** A clear, concise overview of the research (purpose, scope, significance).
+    *   **Chapter 1:** Organize the first part of the research with a logical flow.
+    *   **Chapter 2:** Expand on the second part, adding insights and maintaining coherence.
+    *   **Chapter 3:** Conclude with a final section, summarizing key points and findings.
+
+Ensure the writing is engaging, professional, and easy to understand. Preserve the original meaning of the data while improving readability and structure. Maintain a consistent tone throughout.</code></pre></div>
+                <h3><div class="step-number">⑥</div> Prompt AI for Script Writing</h3><div class="prompt-box"><div class="prompt-header"><span class="prompt-title">Script Generation Prompt</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div><pre><code>I have structured my research into multiple sections. I need your help to convert each section into a detailed video script, one at a time.
+
+**STRICT RULES:**
+*   Do **not** generate any section other than the one I provide.
+*   Do **not** summarize. **Expand** on details and provide deeper explanations.
+*   Write in **natural, conversational Hinglish** (e.g., "Jaise main baat kar rahi hun").
+*   Make it an **engaging, storytelling style** and **curiosity-driven**.
+*   Use **smooth transitions, emotional depth, and real-life, relatable examples**.
+*   If possible, **add rhetorical questions and suspense** to keep viewers hooked.
+
+Now, convert **only the following section** into a long, detailed script:
+
+[Paste ONE section from your #OrganizedData file here]</code></pre></div>
+            </section>
+        </main>
+        <footer class="footer-section">
+            <h3>Download The Complete Workflow</h3>
+            <button id="download-btn" class="download-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg><span>Download as PDF</span></button>
+            <p class="download-instruction">This will open the print menu. Please select 'Save as PDF' as the destination.</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- 1. GUARANTEED COPY BUTTON FUNCTIONALITY ---
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const pre = e.currentTarget.closest('.prompt-box').querySelector('pre');
+                const textToCopy = pre.innerText;
+
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'absolute';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                
+                textArea.select();
+                textArea.setSelectionRange(0, 99999);
+
+                try {
+                    document.execCommand('copy');
+                    const buttonText = button.querySelector('span');
+                    button.style.backgroundColor = 'var(--success-color)';
+                    buttonText.innerText = 'Copied!';
+                    setTimeout(() => {
+                        buttonText.innerText = 'Copy';
+                        button.style.backgroundColor = 'var(--button-bg)';
+                    }, 2000);
+                } catch (err) {
+                    alert('Oops, unable to copy. Please copy manually.');
+                }
+
+                document.body.removeChild(textArea);
+            });
+        });
+
+        // --- 2. GUARANTEED PDF DOWNLOAD VIA BROWSER PRINT ---
+        const downloadButton = document.getElementById('download-btn');
+        downloadButton.addEventListener('click', () => {
+            // This single command triggers the browser's native print dialog.
+            // The @media print styles will take care of the formatting.
+            window.print();
+        });
+    });
+    </script>
+</body>
+</html>
