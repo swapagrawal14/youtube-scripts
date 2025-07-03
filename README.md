@@ -6,7 +6,7 @@ All workflows are hosted live as interactive pages using GitHub Pages. Just clic
 
 ---
 
-##  disponíveis Workflows:
+##  Different Workflows:
 
 *   ### [Crime Thriller Workflow](https://swapagrawal14.github.io/youtube-scripts/crime-thriller-workflow/)
     *   A complete, step-by-step guide with AI prompts to create high-quality crime thriller videos from scratch.
