@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Comedy Script Workflow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Teko:wght@700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #111111;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --solid-bg-for-pdf: #141414;
+            --border-color: rgba(0, 255, 255, 0.3);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --heading-color: #ffffff;
+            --accent-color-1: #00ffff; /* Cyan */
+            --accent-color-2: #ff00ff; /* Magenta */
+            --button-bg: #ff00ff;
+            --button-hover: #cc00cc;
+            --success-color: #00ff7f; /* Spring Green */
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+        }
+        h1, h2, h3 { font-family: 'Teko', sans-serif; font-weight: 700; color: var(--heading-color); letter-spacing: 1px;}
+        h1 { font-size: 4em; text-align: center; color: var(--accent-color-1); text-shadow: 0 0 5px var(--accent-color-1), 0 0 10px var(--accent-color-1), 0 0 15px var(--accent-color-2); margin-bottom: 40px; }
+        h2 { font-size: 2.8em; margin-top: 50px; margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; color: var(--accent-color-2); }
+        h3 { display: flex; align-items: center; font-size: 2em; margin-bottom: 20px; }
+        p, li { font-size: 1.1em; line-height: 1.7; color: var(--text-secondary); }
+        ul { list-style-type: none; padding-left: 10px; }
+        li { margin-bottom: 15px; padding-left: 30px; position: relative; }
+        li::before { content: '🎤'; color: var(--accent-color-1); position: absolute; left: 0; top: 2px; font-size: 1.2em; }
+        .step-number { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: linear-gradient(45deg, var(--accent-color-2), var(--accent-color-1)); color: var(--bg-color); font-size: 1.3em; font-weight: bold; border-radius: 10px; margin-right: 15px; flex-shrink: 0; }
+        .prompt-box { background-color: #1a1a1a; border: 1px solid var(--border-color); border-radius: 12px; margin: 25px 0; position: relative; overflow: hidden; }
+        .prompt-header { background-color: rgba(0, 255, 255, 0.05); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+        .prompt-title { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.9em; }
+        pre { padding: 20px; white-space: pre-wrap; word-wrap: break-word; margin: 0; max-height: 400px; overflow-y: auto; }
+        code { font-family: 'JetBrains Mono', monospace; color: #b3d4ff; font-size: 1em; }
+        .copy-btn { display: flex; align-items: center; gap: 8px; background-color: var(--button-bg); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; transition: all 0.3s ease; }
+        .copy-btn:hover { background-color: var(--button-hover); transform: translateY(-2px); }
+        .copy-btn svg { width: 16px; height: 16px; }
+        .footer-section { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 2px dashed var(--border-color); }
+        .download-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2)); color: #111; border: none; padding: 15px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .download-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 0, 255, 0.4); }
+        .download-instruction { font-size: 0.9em; color: var(--text-secondary); margin-top: 15px; }
+        strong { font-weight: 600; color: var(--text-primary); }
+
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            .container { max-width: 100%; width: 100%; background: var(--solid-bg-for-pdf) !important; padding: 20mm; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-radius: 0; }
+            h1, h2, h3, p, li, code, strong, .step-number { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
+            h1, h2, .step-number, .download-btn { background: none !important; -webkit-text-fill-color: initial !important; }
+            h1 { color: var(--accent-color-1) !important; text-shadow: none !important; }
+            h2 { color: var(--accent-color-2) !important; }
+            .footer-section, .copy-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="workflow-content">
+        <header><h1>Comedy Script Workflow</h1></header>
+        <main>
+            <section>
+                <h2>Part 1: The Comedy Blueprint</h2>
+                <h3><div class="step-number">①</div> Concept Generation Prompt</h3>
+                <p>Use this prompt to turn a simple thought into a solid comedy idea. This is the foundation of your entire script.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Comedy Concept Blueprint</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>**1. The Core Concept (The "What If?"):** What's the central funny idea? (e.g., "What if a housefly had the dramatic inner monologue of a movie villain?")
+
+**2. The Main Character:** Who is the protagonist? What is their personality? (e.g., "Ramesh, a lazy guy who just wants to nap on a Sunday afternoon.")
+
+**3. The Antagonist/Conflict:** What is stopping the main character? (e.g., "The housefly, 'Professor Buzzkill', who sees Ramesh's newspaper as a weapon of mass destruction.")
+
+**4. The Setting:** Where does this happen? (e.g., "A typical, messy bachelor's living room.")
+
+**5. The Escalation Idea:** How will the situation get progressively worse and more absurd? (e.g., "The fly dodges the newspaper, then starts giving an evil laugh, then gathers other insects for a 'heist' on the dining table.")</code></pre>
+                </div>
+            </section>
+            <section>
+                <h2>Part 2: AI-Powered Script Development</h2>
+                <h3><div class="step-number">②</div> Scene Outline Prompt for AI</h3>
+                <p>Feed your "Comedy Blueprint" to an AI with this prompt to get a structured scene-by-scene outline.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Scene & Gag Outline</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>Take my "Comedy Blueprint" and structure it into a 5-part scene outline using the "Anatomy of Laughter" framework.
+
+1.  **Scene 1 (The Setup & Twist):** Introduce the character in their normal setting, then introduce the core conflict in an unexpected way.
+2.  **Scene 2 (The Escalation - Part 1):** The character's first attempt to solve the problem fails, making it slightly worse.
+3.  **Scene 3 (The Escalation - Part 2):** The character tries again, but the situation becomes even more absurd.
+4.  **Scene 4 (The Peak of Absurdity):** The conflict reaches its most ridiculous and chaotic climax.
+5.  **Scene 5 (The Punchdown & Tag):** The situation is resolved (or not), followed by one final joke (the tag).
+
+For each scene, suggest 1-2 specific gags or jokes.</code></pre>
+                </div>
+                <h3><div class="step-number">③</div> Final Scriptwriting Prompt for AI</h3>
+                <p>Now, take the outline scene-by-scene and use this prompt to generate the final script with dialogue, action, and sound cues.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Dialogue & Action Generation</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>Take the following comedy scene from my outline and turn it into a detailed video script.
+
+**STRICT RULES:**
+*   Write in **natural, fun, conversational Hinglish**. The dialogues should sound like real people talking.
+*   Format it like a proper script: CHARACTER NAME, (action/tone), Dialogue.
+*   Add placeholders for sound effects, camera angles, and character expressions. (e.g., "[SFX: cartoon bonk sound]", "[Camera: Extreme close-up on the character's frustrated face]", "(muttering to himself)").
+*   Punch up the jokes. Make them sharper, more specific, and funnier than the outline.
+*   Keep the pacing quick and snappy.
+
+Now, write the script for ONLY the following scene:
+
+[Paste ONE scene from the AI-generated outline here]</code></pre>
+                </div>
+            </section>
+        </main>
+        <footer class="footer-section">
+            <h3>Download This Workflow</h3>
+            <button id="download-btn" class="download-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download as PDF</span>
+            </button>
+            <p class="download-instruction">This will open the print menu. Please select 'Save as PDF' as the destination.</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- GUARANTEED COPY BUTTON FUNCTIONALITY (UNIVERSAL METHOD) ---
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const pre = e.currentTarget.closest('.prompt-box').querySelector('pre');
+                const textToCopy = pre.innerText;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'absolute';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                textArea.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    const buttonText = button.querySelector('span');
+                    const originalColor = button.style.backgroundColor;
+                    button.style.backgroundColor = 'var(--success-color)';
+                    buttonText.innerText = 'Copied!';
+                    setTimeout(() => {
+                        buttonText.innerText = 'Copy';
+                        button.style.backgroundColor = 'var(--button-bg)';
+                    }, 2000);
+                } catch (err) {
+                    alert('Oops, unable to copy. Please copy manually.');
+                }
+                document.body.removeChild(textArea);
+            });
+        });
+
+        // --- GUARANTEED PDF DOWNLOAD VIA BROWSER PRINT ---
+        const downloadButton = document.getElementById('download-btn');
+        downloadButton.addEventListener('click', () => {
+            window.print();
+        });
+    });
+    </script>
+</body>
+</html>
