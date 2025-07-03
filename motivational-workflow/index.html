@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Motivational Script Workflow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0a192f, #172a45);
+            --card-bg: rgba(2, 12, 27, 0.7);
+            --solid-bg-for-pdf: #020c1b;
+            --border-color: rgba(100, 255, 218, 0.1);
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --heading-color: #e6f1ff;
+            --accent-gradient: linear-gradient(90deg, #ffc371, #ff5f6d);
+            --accent-color-1: #ffc371; /* Gold */
+            --accent-color-2: #ff5f6d; /* Coral */
+            --button-bg: #ff5f6d;
+            --button-hover: #e04a57;
+            --success-color: #64ffda;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--heading-color); }
+        h1 { font-size: 2.8em; text-align: center; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; }
+        h2 { font-size: 2em; margin-top: 50px; margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+        h3 { display: flex; align-items: center; font-size: 1.5em; margin-bottom: 20px; }
+        p, li { font-size: 1.1em; line-height: 1.7; color: var(--text-secondary); }
+        ul { list-style-type: none; padding-left: 10px; }
+        li { margin-bottom: 15px; padding-left: 25px; position: relative; }
+        li::before { content: '✨'; color: var(--accent-color-1); position: absolute; left: 0; top: 2px; }
+        .step-number { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: var(--accent-gradient); color: var(--solid-bg-for-pdf); font-size: 1.3em; font-weight: bold; border-radius: 10px; margin-right: 15px; flex-shrink: 0; }
+        .prompt-box { background-color: #020c1b; border: 1px solid var(--border-color); border-radius: 12px; margin: 25px 0; position: relative; overflow: hidden; }
+        .prompt-header { background-color: rgba(100, 255, 218, 0.05); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+        .prompt-title { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.9em; }
+        pre { padding: 20px; white-space: pre-wrap; word-wrap: break-word; margin: 0; max-height: 400px; overflow-y: auto; }
+        code { font-family: 'JetBrains Mono', monospace; color: #a3b6e0; font-size: 1em; }
+        .copy-btn { display: flex; align-items: center; gap: 8px; background-color: var(--button-bg); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 600; transition: all 0.3s ease; }
+        .copy-btn:hover { background-color: var(--button-hover); transform: translateY(-2px); }
+        .copy-btn svg { width: 16px; height: 16px; }
+        .footer-section { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 2px dashed var(--border-color); }
+        .download-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--accent-gradient); color: #020c1b; border: none; padding: 15px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .download-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 95, 109, 0.4); }
+        .download-instruction { font-size: 0.9em; color: var(--text-secondary); margin-top: 15px; }
+        strong { font-weight: 600; color: var(--text-primary); }
+
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            .container { max-width: 100%; width: 100%; background: var(--solid-bg-for-pdf) !important; padding: 20mm; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-radius: 0; }
+            h1, h2, h3, p, li, code, strong { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
+            h1 { background: var(--accent-gradient) !important; -webkit-background-clip: text !important; color: transparent !important; }
+            .footer-section, .copy-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="workflow-content">
+        <header><h1>The Ultimate Motivational Script Workflow</h1></header>
+        <main>
+            <section>
+                <h2>Part 1: The Anatomy of Inspiration</h2>
+                <h3><div class="step-number">①</div> Idea Research & Brainstorming Prompt</h3>
+                <p>Use this prompt to lay the foundation for your video. This will help you find your core message and target audience.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Motivational Idea Research</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>**1. Core Message (The "Big Idea"):** What is the single, most important message I want to convey? (e.g., "Failure is not the opposite of success, it's a part of it.")
+
+**2. Target Audience & Their Pain Point:** Who am I talking to? (e.g., Students, Entrepreneurs, Artists). What is their biggest struggle or fear right now? (e.g., Fear of starting, fear of judgment, feeling lost).
+
+**3. Common Misconception:** What is a common belief about this topic that is wrong? (e.g., "You need to feel motivated to start." The truth is: "Action creates motivation.")
+
+**4. Powerful Story/Metaphor:** What story, personal anecdote, or metaphor can I use to make my point unforgettable? (e.g., The story of the Chinese Bamboo Tree, Thomas Edison's failures).
+
+**5. Actionable Framework:** What are 3-5 simple, practical steps the viewer can take to apply my message in their life? (e.g., 1. The 5-Minute Rule, 2. Set Micro-Goals, 3. Celebrate Small Wins).</code></pre>
+                </div>
+            </section>
+            <section>
+                <h2>Part 2: The AI-Powered Scripting Process</h2>
+                <h3><div class="step-number">②</div> Data Structuring Prompt for AI</h3>
+                <p>After brainstorming, give all your raw ideas to an AI with this prompt to structure it into a coherent narrative.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Narrative Structuring Prompt</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>I have brainstormed ideas for a motivational video. Your task is to structure these raw notes into a compelling narrative using the "Anatomy of Inspiration" framework.
+
+1.  **Create a Relatable Hook:** Use the audience's pain point to create a powerful opening question or statement.
+2.  **Agitate the Pain Point:** Expand on why this is a serious problem.
+3.  **Create a Pivot:** Introduce the core message as a new hope or a new perspective.
+4.  **Weave in the Story:** Seamlessly integrate the provided story/metaphor to support the core message.
+5.  **Build the Framework:** Clearly present the actionable steps in a logical sequence.
+6.  **Write an Empowering Climax:** Build towards an emotional and powerful conclusion.
+7.  **Suggest an Immediate Call to Action:** Propose one small, easy first step for the viewer.
+8.  **Draft a Visionary Outro:** End with a powerful, forward-looking statement.
+
+Make the flow logical and the language engaging. Preserve the original core ideas but enhance the narrative structure.</code></pre>
+                </div>
+                <h3><div class="step-number">③</div> Final Script Generation Prompt for AI</h3>
+                <p>This is the final step. Give the structured narrative to the AI section-by-section to generate the final, polished script.</p>
+                <div class="prompt-box">
+                    <div class="prompt-header"><span class="prompt-title">Polished Script Generation</span><button class="copy-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Copy</span></button></div>
+                    <pre><code>Take the following section of a motivational narrative and expand it into a detailed, powerful video script.
+
+**STRICT RULES:**
+*   Write in **natural, conversational Hinglish** (e.g., "Zindagi hamesha aasaan nahi hoti...").
+*   Use powerful, evocative language and emotional storytelling.
+*   Add placeholders for visuals, music cues, and tone of voice. (e.g., "[Visual: Slow-motion shot of rain on a window]", "[Music: Soft piano starts to build]", "[Tone: Hopeful and rising]").
+*   Expand on the ideas, do not just summarize. Dig deeper into the emotions and concepts.
+*   Ensure the script flows like a real, impactful speech.
+
+Now, convert ONLY the following section into a polished script:
+
+[Paste ONE section from the AI-structured narrative here]</code></pre>
+                </div>
+            </section>
+        </main>
+        <footer class="footer-section">
+            <h3>Download This Workflow</h3>
+            <button id="download-btn" class="download-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download as PDF</span>
+            </button>
+            <p class="download-instruction">This will open the print menu. Please select 'Save as PDF' as the destination.</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- GUARANTEED COPY BUTTON FUNCTIONALITY (UNIVERSAL METHOD) ---
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const pre = e.currentTarget.closest('.prompt-box').querySelector('pre');
+                const textToCopy = pre.innerText;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'absolute';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                textArea.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    const buttonText = button.querySelector('span');
+                    button.style.backgroundColor = 'var(--success-color)';
+                    button.style.color = '#020c1b';
+                    buttonText.innerText = 'Copied!';
+                    setTimeout(() => {
+                        buttonText.innerText = 'Copy';
+                        button.style.backgroundColor = 'var(--button-bg)';
+                        button.style.color = 'white';
+                    }, 2000);
+                } catch (err) {
+                    alert('Oops, unable to copy. Please copy manually.');
+                }
+                document.body.removeChild(textArea);
+            });
+        });
+
+        // --- GUARANTEED PDF DOWNLOAD VIA BROWSER PRINT ---
+        const downloadButton = document.getElementById('download-btn');
+        downloadButton.addEventListener('click', () => {
+            window.print();
+        });
+    });
+    </script>
+</body>
+</html>
